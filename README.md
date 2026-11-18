@@ -22,7 +22,8 @@ in the browser: as an embedded player, or as a full-page "virus" takeover.
    `bad-apple.frames.gz`, `bad-apple.frames.js`, `bad-apple.ogg` and, with
    ffmpeg, `bad-apple.mp3`. They are committed already, so this is only needed
    if you change `assets/`.
-2. Upload `bad-apple.js` and those files to one folder on your site.
+2. Upload `bad-apple.js` and those files to one folder on your site. Or get
+   them from npm (`npm install bad-apple-virus`, see below).
 3. Use it:
 
 ```html
@@ -57,6 +58,21 @@ From JavaScript: `BadApple.takeover({ theme, fit, backdrop, fullscreen, onclose 
 `BadApple.konami(options)`, and `element.play()` / `.pause()` / `.seek(seconds)`.
 Elements fire `play`, `pause`, `ended` and `error` events. Everything renders
 inside a shadow root, so your site's CSS can't break it (or the other way round).
+
+### From npm
+
+```sh
+npm install bad-apple-virus
+```
+
+The package holds only what the browser loads: `web/bad-apple.js`,
+`web/bad-apple.frames.gz`, `web/bad-apple.ogg` and `web/bad-apple.mp3`. Copy
+those four files from `node_modules/bad-apple-virus/web/` into one folder your
+site serves (the player finds the others next to the script), e.g. in your
+build step.
+
+Publishing a new version: bump `version` in `package.json` (and `version` in
+`bad-apple.js`), then `npm publish`.
 
 ## On KDE Plasma (`kde/`)
 

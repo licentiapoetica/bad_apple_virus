@@ -1,0 +1,22 @@
+{
+  "name": "bad-apple-virus",
+  "version": "1.0.0",
+  "description": "\"Bad Apple!!\" played with fake desktop windows in the browser: an embedded player, a full-page takeover, or the Konami code.",
+  "license": "MIT",
+  "author": "licentiapoetica",
+  "homepage": "https://licentiapoetica.github.io/bad_apple_virus/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/licentiapoetica/bad_apple_virus.git"
+  },
+  "bugs": "https://github.com/licentiapoetica/bad_apple_virus/issues",
+  "keywords": ["bad-apple", "touhou", "konami-code", "easter-egg", "web-component"],
+  "main": "web/bad-apple.js",
+  "browser": "web/bad-apple.js",
+  "files": [
+    "web/bad-apple.js",
+    "web/bad-apple.frames.gz",
+    "web/bad-apple.ogg",
+    "web/bad-apple.mp3"
+  ]
+}

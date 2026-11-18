@@ -268,7 +268,7 @@
 .t-breeze .dlg .bd{background:#eff0f1}
 .btn:focus-visible{outline:2px solid #3daee9;outline-offset:2px}
 .x{position:absolute;top:12px;right:12px;z-index:3;font:600 12px/1 system-ui,sans-serif;color:#fff;cursor:pointer;
-  background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 12px}
+  background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.35);padding:7px 12px}
 .x:hover{background:rgba(0,0,0,.85)}
 .in{animation:fade .35s ease-out}
 @keyframes fade{from{opacity:0}}
