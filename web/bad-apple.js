@@ -267,9 +267,6 @@
 .t-breeze .btn:hover{border-color:#3daee9}
 .t-breeze .dlg .bd{background:#eff0f1}
 .btn:focus-visible{outline:2px solid #3daee9;outline-offset:2px}
-.x{position:absolute;top:12px;right:12px;z-index:3;font:600 12px/1 system-ui,sans-serif;color:#fff;cursor:pointer;
-  background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.35);padding:7px 12px}
-.x:hover{background:rgba(0,0,0,.85)}
 .in{animation:fade .35s ease-out}
 @keyframes fade{from{opacity:0}}
 @keyframes pop{from{opacity:0;transform:translate(-50%,-50%) scale(.92)}}
@@ -313,7 +310,6 @@
       this._tick = this._tick.bind(this);
       this.onClose = typeof this.o.onClose === 'function' ? this.o.onClose : null;
       this._build();
-      this.closeBtn.hidden = !this.onClose;
       this._setupAudio();
       this.set({});
       this._prompt('Play ' + this.o.title + '?', 'Play');
@@ -332,22 +328,19 @@
         '<div class="win dlg" role="dialog" hidden><div class="tb"><i class="ic"></i><span class="tt"></span>' +
         '<span class="bt"><i class="cl" title="Close"></i></span></div>' +
         '<div class="bd"><div class="msg"><i class="ic"></i><span class="txt"></span></div>' +
-        '<div class="row"><button class="btn" type="button"></button></div></div></div>' +
-        '<button class="x" type="button" hidden>✕ Close <span aria-hidden="true">(Esc)</span></button></div>';
+        '<div class="row"><button class="btn" type="button"></button></div></div></div></div>';
       const $ = s => this.root.querySelector(s);
       this.stage = $('.stage');
       this.field = $('.field');
       this.dlg = $('.dlg');
       this.dlgText = $('.dlg .txt');
       this.dlgBtn = $('.dlg .btn');
-      this.closeBtn = $('.x');
       this.tpl = document.createElement('template');
       this.tpl.innerHTML = WIN_HTML;
 
       this.dlgBtn.addEventListener('click', e => { e.stopPropagation(); this.play(); });
       $('.dlg .cl').addEventListener('click', e => { e.stopPropagation(); this.onClose ? this.onClose() : (this.dlg.hidden = true); });
       this.dlg.addEventListener('click', e => e.stopPropagation());
-      this.closeBtn.addEventListener('click', e => { e.stopPropagation(); this.onClose && this.onClose(); });
       this.stage.addEventListener('click', () => this.toggle());
       this.stage.addEventListener('keydown', e => {
         if (e.target === this.stage && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); this.toggle(); }
