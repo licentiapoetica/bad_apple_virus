@@ -120,9 +120,11 @@ def find_player(path: Path, start: float) -> list[str] | None:
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Bad Apple!! played with KDE Plasma windows.")
-    p.add_argument("--screen", default="", help="output name (e.g. DP-1), or 'all' to span every screen; default: the active one")
-    p.add_argument("--fit", choices=["contain", "stretch"], default="contain",
-                   help="contain keeps the 4:3 picture (default); stretch fills the screen like the Windows original")
+    p.add_argument("--screen", default="all",
+                   help="'all' spans the whole desktop, every monitor (default); 'active' is the focused monitor; "
+                        "or an output name like DP-1 (see --list-screens)")
+    p.add_argument("--fit", choices=["stretch", "contain"], default="stretch",
+                   help="stretch fills the whole area like the Windows original (default); contain keeps the 4:3 picture")
     p.add_argument("--windows", type=int, default=155, help="number of windows, 1-255 (155 shows every frame in full)")
     p.add_argument("--backdrop", action="store_true", help="put a black window behind the picture instead of letting the desktop show through")
     p.add_argument("--borderless", action="store_true", help="no title bars: pixel-exact white rectangles")
@@ -156,7 +158,7 @@ def main() -> int:
         return 0
 
     names = [s.name() for s in app.screens()]
-    if args.screen not in ("", "all") and args.screen not in names:
+    if args.screen not in ("all", "active") and args.screen not in names:
         sys.exit(f"unknown screen {args.screen!r}; have: {', '.join(names)}")
 
     kwin = KWinScript()

@@ -63,9 +63,14 @@ inside a shadow root, so your site's CSS can't break it (or the other way round)
 Real windows, on Plasma 6 (Wayland or X11):
 
 ```sh
-python3 kde/bad_apple_kde.py            # Ctrl+C stops it
-python3 kde/bad_apple_kde.py --help     # --screen, --fit stretch, --backdrop, --borderless, --mute, ...
+python3 kde/bad_apple_kde.py --backdrop   # Ctrl+C stops it
+python3 kde/bad_apple_kde.py --help       # --screen, --fit contain, --borderless, --mute, ...
 ```
+
+By default it fills the whole desktop: every monitor, panels included, stretched
+to fit like the Windows original. `--screen active` (or an output name from
+`--list-screens`) limits it to one monitor, and `--fit contain` keeps the 4:3
+picture. `--backdrop` puts black behind the windows instead of your desktop.
 
 Needs PyQt6 or PySide6 (`pacman -S python-pyqt6`) and `pw-play`, `paplay`, `mpv`
 or `ffplay` for the sound.

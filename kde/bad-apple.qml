@@ -127,12 +127,22 @@ Item {
         return next;
     }
 
+    // The full area, panels included: every screen's bounding box by default,
+    // or one screen ("active" = the focused one, or an output name like DP-1).
     function pickArea() {
-        if (Config.screen === "all")
-            return Workspace.clientArea(KWin.WorkArea, Workspace.activeScreen, Workspace.currentDesktop);
+        if (Config.screen === "all") {
+            let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+            for (const s of Workspace.screens) {
+                const g = s.geometry;
+                x0 = Math.min(x0, g.x); y0 = Math.min(y0, g.y);
+                x1 = Math.max(x1, g.x + g.width); y1 = Math.max(y1, g.y + g.height);
+            }
+            return Qt.rect(x0, y0, x1 - x0, y1 - y0);
+        }
         let output = Workspace.activeScreen;
         for (const s of Workspace.screens) if (s.name === Config.screen) output = s;
-        return Workspace.clientArea(KWin.MaximizeArea, output, Workspace.currentDesktop);
+        const g = output.geometry;
+        return Qt.rect(g.x, g.y, g.width, g.height);
     }
 
     function layout() {
@@ -147,7 +157,7 @@ Item {
         for (let i = 0; i <= gridW; i++) xs.push(Math.round(fx + i * fw / gridW));
         for (let i = 0; i <= gridH; i++) ys.push(Math.round(fy + i * fh / gridH));
         st.xs = xs; st.ys = ys;
-        st.field = Qt.rect(xs[0], ys[0], xs[gridW] - xs[0], ys[gridH] - ys[0]);
+        st.area = a;  // the backdrop covers all of it, letterbox included
 
         // park hidden windows to the left of every screen
         let left = 0, top = 0;
@@ -164,7 +174,8 @@ Item {
             w.noBorder = true;
             w.keepAbove = true;
             w.skipTaskbar = w.skipPager = w.skipSwitcher = true;
-            w.frameGeometry = st.field;
+            w.frameGeometry = st.area;
+            st.backdrop = w;
             return;
         }
         w.keepAbove = true;
@@ -230,6 +241,10 @@ Item {
         st.done = true;
         timer.stop();
         draw(-1);
+        if (st.backdrop) {
+            const g = st.backdrop.frameGeometry;
+            log("backdrop: " + g.width + "x" + g.height + "+" + g.x + "+" + g.y);
+        }
         log("finished" + (Config.measure ? "; " + (st.stale || 0) + " of " + (st.checked || 0) +
                           " window placements were still pending a frame later" : ""));
     }
