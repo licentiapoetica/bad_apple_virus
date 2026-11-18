@@ -12,6 +12,9 @@ Video demonstration:
 
 ## On your website (`web/`)
 
+**Live demo: https://licentiapoetica.github.io/bad_apple_virus/** (published
+from `web/` by `.github/workflows/pages.yml` on every push to `master`).
+
 A dependency-free script that plays the same frames with fake desktop windows
 in the browser: as an embedded player, or as a full-page "virus" takeover.
 

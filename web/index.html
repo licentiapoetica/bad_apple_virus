@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bad Apple!! but it's windows</title>
+<meta name="description" content="Bad Apple!! played with up to 155 desktop windows, moved and resized 30 times a second. In your browser, or on KDE Plasma with real windows.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://licentiapoetica.github.io/bad_apple_virus/">
+<meta property="og:title" content="Bad Apple!! but it's windows">
+<meta property="og:description" content="Every white pixel is a desktop window. Don't click the red button.">
+<meta property="og:image" content="https://licentiapoetica.github.io/bad_apple_virus/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#111111">
 <style>
   :root { color-scheme: dark; --fg: #e8e8e8; --dim: #9a9a9a; --line: #2c2c2c; --accent: #ff5d5d; }
   * { box-sizing: border-box; }
@@ -19,6 +29,8 @@
     border-radius: 999px; padding: 6px 14px; cursor: pointer; }
   .bar button[aria-pressed="true"] { background: var(--fg); color: #111; border-color: var(--fg); }
   .danger { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; padding: 10px 20px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; color: var(--dim); }
+  a { color: var(--fg); }
   pre { background: #0a0a0a; border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; overflow-x: auto; font-size: 13.5px; line-height: 1.5; }
   code { font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; }
   kbd { font: 12px ui-monospace, monospace; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 1px 5px; }
@@ -55,6 +67,18 @@
 
 &lt;!-- or arm the Konami code --&gt;
 &lt;script src="/bad-apple/bad-apple.js" data-konami="breeze" defer&gt;&lt;/script&gt;</code></pre>
+
+  <h2>Or with real windows on KDE Plasma</h2>
+  <p>On Plasma 6 (Wayland or X11), a KWin script moves real windows into every frame:</p>
+<pre><code>git clone https://github.com/licentiapoetica/bad_apple_virus
+cd bad_apple_virus
+python3 kde/bad_apple_kde.py --backdrop</code></pre>
+
+  <footer>
+    Source: <a href="https://github.com/licentiapoetica/bad_apple_virus">licentiapoetica/bad_apple_virus</a>,
+    forked from <a href="https://github.com/mon/bad_apple_virus">mon/bad_apple_virus</a>, the original Windows version.
+    "Bad Apple!!" by Alstroemeria Records; shadow-art video by Anira.
+  </footer>
 </main>
 <script>
   const player = document.getElementById('player');
